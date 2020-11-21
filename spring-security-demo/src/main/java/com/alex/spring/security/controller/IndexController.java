@@ -20,4 +20,13 @@ public class IndexController {
         System.out.println(investUser);
         return investUser;
     }
+
+    @RequestMapping("/test/index")
+    @ResponseBody
+    public InvestUser testIndex() {
+        InvestUser investUser = investUserService.selectById(1L);
+
+        System.out.println(investUser);
+        return investUser;
+    }
 }
