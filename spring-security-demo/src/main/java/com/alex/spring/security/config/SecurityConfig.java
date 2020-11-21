@@ -24,6 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        //无权限时跳转的页面
+        http.exceptionHandling().accessDeniedPage("/noPermit.html");
+
         http.formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/user/login")  //登录访问路径
@@ -37,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //3 用户拥有的角色时才可以访问
                 //.antMatchers("/test/role").hasRole("sale")
                 //4 用户拥有任意 角色时都可以访问
-                .antMatchers("/test/anyRole").hasAnyRole("sale,manager")
+                .antMatchers("/test/anyRole").hasAnyRole("boss")
                 .anyRequest().authenticated()
                 .and().csrf().disable(); //关闭CSRF
     }
