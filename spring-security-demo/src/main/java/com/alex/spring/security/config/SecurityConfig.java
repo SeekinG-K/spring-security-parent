@@ -31,7 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers("/", "/test/hello", "user/login").permitAll() //授权以上路径， 可以直接访问
                 //当前登录的用户只有admin权限时才可以访问该路径
-                .antMatchers("/test/permit").hasAuthority("admin")
+//                .antMatchers("/test/permit").hasAuthority("admin")
+                //当前登录的用户有任意一个权限时，都可以访问该路径
+                .antMatchers("/test/permit").hasAnyAuthority("admin, guest")
                 .anyRequest().authenticated()
                 .and().csrf().disable(); //关闭CSRF
     }
