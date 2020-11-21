@@ -5,9 +5,10 @@ import com.alex.spring.security.service.InvestUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class IndexController {
 
     @Autowired
@@ -74,5 +75,11 @@ public class IndexController {
         InvestUser investUser = investUserService.selectById(1L);
         System.out.println(investUser);
         return investUser;
+    }
+
+    @RequestMapping("/test/logout")
+    public String testLogout() {
+        InvestUser investUser = investUserService.selectById(1L);
+        return "logout";
     }
 }

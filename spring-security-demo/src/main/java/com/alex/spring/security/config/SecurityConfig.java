@@ -25,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        http.logout().logoutUrl("/logout").logoutSuccessUrl("/test/logout").permitAll();
+
         //无权限时跳转的页面
         http.exceptionHandling().accessDeniedPage("/noPermit.html");
 
@@ -33,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/user/login")  //登录访问路径
                 .defaultSuccessUrl("/test/index").permitAll()
                 .and().authorizeRequests()
-                .antMatchers("/", "/test/hello", "user/login").permitAll() //授权以上路径， 可以直接访问
+                .antMatchers("/", "/test/logout", "user/login").permitAll() //授权以上路径， 可以直接访问
                 //1.当前登录的用户只有admin权限时才可以访问该路径
                 //.antMatchers("/test/Authority").hasAuthority("admin")
                 //2.当前登录的用户有任意一个权限时，都可以访问该路径
