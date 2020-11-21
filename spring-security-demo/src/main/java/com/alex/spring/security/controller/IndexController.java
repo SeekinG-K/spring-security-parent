@@ -3,6 +3,8 @@ package com.alex.spring.security.controller;
 import com.alex.spring.security.model.InvestUser;
 import com.alex.spring.security.service.InvestUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -52,6 +54,24 @@ public class IndexController {
     public InvestUser testAnyRole() {
         InvestUser investUser = investUserService.selectById(1L);
 
+        System.out.println(investUser);
+        return investUser;
+    }
+
+    @RequestMapping("/test/globalRole")
+    @ResponseBody
+    @Secured({"ROLE_boss"})
+    public InvestUser testGlobal() {
+        InvestUser investUser = investUserService.selectById(1L);
+        System.out.println(investUser);
+        return investUser;
+    }
+
+    @RequestMapping("/test/globalAuthority")
+    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('admin')")
+    public InvestUser testGlobalAuthority() {
+        InvestUser investUser = investUserService.selectById(1L);
         System.out.println(investUser);
         return investUser;
     }
