@@ -29,4 +29,13 @@ public class IndexController {
         System.out.println(investUser);
         return investUser;
     }
+
+    @RequestMapping("/test/permit")
+    @ResponseBody
+    public InvestUser testPermit() {
+        InvestUser investUser = investUserService.selectById(1L);
+
+        System.out.println(investUser);
+        return investUser;
+    }
 }
