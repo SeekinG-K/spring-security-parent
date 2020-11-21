@@ -38,4 +38,21 @@ public class IndexController {
         System.out.println(investUser);
         return investUser;
     }
+    @RequestMapping("/test/role")
+    @ResponseBody
+    public InvestUser testRole() {
+        InvestUser investUser = investUserService.selectById(1L);
+
+        System.out.println(investUser);
+        return investUser;
+    }
+
+    @RequestMapping("/test/anyRole")
+    @ResponseBody
+    public InvestUser testAnyRole() {
+        InvestUser investUser = investUserService.selectById(1L);
+
+        System.out.println(investUser);
+        return investUser;
+    }
 }

@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         InvestUser investUser = investUserService.selectOne(wrapper);
         if (Objects.isNull(investUser))
             throw new UsernameNotFoundException("用户不存在");
-        List<GrantedAuthority> grantedAuthorityList = AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
+        List<GrantedAuthority> grantedAuthorityList = AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_sale,ROLE_manager");
         return new User(investUser.getName(),new BCryptPasswordEncoder().encode(investUser.getPassword()), grantedAuthorityList);
     }
 }
